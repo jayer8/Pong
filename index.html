@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Pong JavaScript</title>
+		<script type="text/javascript" src="js/Vector2D.js"></script>
+		<script type="text/javascript" src="js/Paddle.js"></script>
+		<script type="text/javascript" src="js/Ball.js"></script>
+		<script type="text/javascript" src="js/Controls.js"></script>
+		<script type="text/javascript" src="js/Pong.js"></script>
+		<script type="text/javascript">
+			/***
+			 * Muestra un mensaje en el documento.
+			 * @param {String} text Texto a mostrar.
+			 * @param {Boolean} entry Si es true, genera una nueva entrada
+			 * 						  para mostrar el texto. Si es false
+			 * 						  sobre escribe la entrada anterior.
+			 */
+			function log(text, entry) {
+				var layer = document.getElementById("log");
+				if (entry) {
+					layer.innerHTML += "<br />" + text;
+				}
+				else {
+					layer.innerHTML = text;
+				}
+			}
+			
+			/***
+			 * Invoca una función definida por el usuario cada (1000 / 60) ms.
+			 */
+			window.requestAnimationFrame = (function() {
+				return window.requestAnimationFrame		  ||
+					   window.webkitRequestAnimationFrame ||
+					   window.mozRequestAnimationFrame	  ||
+					   function(callback) {
+					   		window.setTimeout(callback, 1000 / 60);
+					   };
+			})();
+			
+			/***
+			 * Crea una nueva instancia de la clase Pong y enlaza el evento
+			 * onkeydown al manejador del objeto Pong creado, cuando se carga
+			 * el documento en el navegador.
+			 */
+			window.onload = function() {
+				var pong = new Pong();
+				document.onkeydown = function(e) {
+					pong.keyPress(e);
+				};
+			};
+		</script>
+	</head>
+
+	<body>
+		<canvas id="canvas"> </canvas>
+		<div id="log"> </div>
+	</body>
+</html>
